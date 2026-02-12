@@ -1,6 +1,6 @@
-venv/
 __pycache__/
 *.pyc
-.streamlit/secrets.toml
-.DS_Store
 .idea/
+venv/
+.DS_Store
+.streamlit/secrets.toml
