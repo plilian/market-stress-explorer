@@ -70,16 +70,10 @@ def compute_thresholds(
     k_stress: float = 1.0,
     k_extreme: float = 2.0,
 ) -> tuple[float, float]:
-    """
-    Returns (stress_threshold, extreme_threshold) based on stress_score distribution.
+    import numpy as np
 
-    method:
-      - "percentile": stress=P85, extreme=P95 (default, robust)
-      - "std": stress=mean+1*std, extreme=mean+2*std
-    """
     s = stress_series.replace([np.inf, -np.inf], np.nan).dropna()
     if len(s) < 50:
-        # fallback if too few points
         mu = float(s.mean()) if len(s) else 0.0
         sigma = float(s.std()) if len(s) else 1.0
         return mu + 1.0 * sigma, mu + 2.0 * sigma
@@ -90,9 +84,12 @@ def compute_thresholds(
         mu = float(s.mean())
         sigma = float(s.std())
         return mu + k_stress * sigma, mu + k_extreme * sigma
+
     stress_thr = float(s.quantile(p_stress))
     extreme_thr = float(s.quantile(p_extreme))
+
     if extreme_thr <= stress_thr:
         extreme_thr = stress_thr + 1e-6
 
     return stress_thr, extreme_thr
+
