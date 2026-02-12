@@ -54,32 +54,51 @@ I’m a **Data & Analytics Developer** focused on building practical data tools:
     st.divider()
     st.subheader("What this tool does")
     st.write("""
-**Market Stress Explorer** is a multi-factor regime detection tool.
+    **Market Stress Explorer** is a multi-factor **multi-asset** regime detection tool.
 
-It does NOT try to predict price.
-It detects unstable regimes using:
-- Volatility expansion
-- Volume shock
-- Liquidity proxy
+    It does NOT try to predict price.
+    It detects unstable regimes using:
+    - Volatility expansion
+    - Volume shock
+    - Liquidity proxy
 
-Metrics are normalized and combined into a single stress score.
-""")
+    Supported markets (examples):
+    - Crypto: BTC-USD, ETH-USD
+    - Stocks: AAPL, NVDA
+    - Indices: ^GSPC, ^IXIC
+    - FX: EURUSD=X, USDTRY=X
+    - Commodities: GC=F (Gold), CL=F (Oil)
 
+    Metrics are normalized and combined into a single stress score.
+    """)
     st.subheader("Disclaimer")
     st.write("Analytics/monitoring only. Not financial advice.")
 
 
 def main():
     st.title("Market Stress Explorer")
-    st.caption("Multi-factor stress signal built from OHLCV: volatility, volume shock, liquidity proxy.")
+    st.caption(
+        "Multi-asset market stress & regime detection tool (Crypto, Stocks, Indices, FX, Commodities) using OHLCV data.")
 
     with st.sidebar:
         st.header("Inputs")
 
         with st.form("controls", clear_on_submit=False):
-            ticker = st.text_input("Ticker", value="BTC-USD")
+            ticker = st.text_input(
+                "Ticker",
+                value="BTC-USD",
+                help="Works across asset classes via Yahoo Finance. Examples: BTC-USD, ETH-USD, AAPL, NVDA, SPY, ^GSPC, EURUSD=X, GC=F"
+            )
             period = st.selectbox("Period", ["6mo", "1y", "2y", "5y", "10y"], index=2)
             interval = st.selectbox("Interval", ["1d", "1wk", "1mo"], index=0)
+            with st.expander("Example tickers (multi-asset)"):
+                st.write("""
+            **Crypto:** BTC-USD, ETH-USD, SOL-USD  
+            **Stocks:** AAPL, NVDA, TSLA, SPY  
+            **Indices:** ^GSPC (S&P 500), ^IXIC (NASDAQ)  
+            **FX:** EURUSD=X, USDTRY=X  
+            **Commodities:** GC=F (Gold), CL=F (Oil)
+            """)
 
             st.divider()
             st.subheader("Regime thresholds")
