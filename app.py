@@ -8,7 +8,7 @@ from src.features import (
     add_returns,
     add_rolling_volatility,
     add_volume_shock,
-    add_liquidity_proxy,
+    add_liquidity_proxy
 )
 from src.scoring import compute_stress_score, add_regime
 from src.viz import plot_price_and_stress, plot_feature_breakdown
