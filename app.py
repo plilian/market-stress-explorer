@@ -245,7 +245,7 @@ def main():
                 st.dataframe(cs, use_container_width=True)
 
             st.divider()
-            st.subheader("Copy-ready summary")
+            st.subheader("Summary")
             normal_pct = float(rs.loc[rs["regime"] == "Normal", "pct"].values[0]) if (rs["regime"] == "Normal").any() else 0.0
             stress_pct = float(rs.loc[rs["regime"] == "Stress", "pct"].values[0]) if (rs["regime"] == "Stress").any() else 0.0
             extreme_pct = float(rs.loc[rs["regime"] == "Extreme", "pct"].values[0]) if (rs["regime"] == "Extreme").any() else 0.0
