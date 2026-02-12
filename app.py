@@ -17,7 +17,7 @@ from src.analysis import (
     regime_summary,
     top_stress_events,
     correlation_snapshot,
-    compute_thresholds,
+    compute_thresholds
 )
 
 st.set_page_config(page_title="Market Stress Explorer", layout="wide")
